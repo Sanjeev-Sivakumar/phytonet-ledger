@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhytoNet Ledger — System Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1920px;
+      height: 1080px;
+      background-color: #F3F7F4; /* Technical daylight paper canvas */
+      color: #112415;
+      font-family: 'Roboto', -apple-system, sans-serif;
+      padding: 60px 100px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Subtle fine ruling line texture matching reference */
+    .ruled-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(#DEEAE0 1px, transparent 1px),
+        linear-gradient(90deg, #DEEAE0 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .top-header {
+      position: relative;
+      z-index: 2;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #5B6D5E;
+      margin-bottom: 8px;
+    }
+
+    .headline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 50px;
+      font-weight: 400;
+      color: #131C15;
+      letter-spacing: -0.01em;
+    }
+
+    .headline span.arrow {
+      color: #8C998E;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      margin: 0 8px;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: #1E562A;
+    }
+
+    /* Architecture Stage */
+    .stage {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg.arch-canvas {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Block Label Typography with light weight */
+    .block-name {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-size: 19px;
+      fill: #14301B;
+      text-anchor: middle;
+      letter-spacing: -0.01em;
+    }
+
+    .block-sub {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      font-size: 13.5px;
+      fill: #5C6E61;
+      text-anchor: middle;
+    }
+
+    .oracle-badge-text {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      fill: #4C1D95;
+      text-anchor: middle;
+    }
+
+    .oracle-sub-text {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      fill: #6D28D9;
+      text-anchor: middle;
+    }
+
+    .footer-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #D2E2D5;
+      padding-top: 16px;
+      font-size: 13.5px;
+      color: #6C7A6E;
+    }
+
+    .footer-bar .spec {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #1E562A;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="ruled-bg"></div>
+
+  <div class="top-header">
+    <div class="tag">HOW IT WORKS</div>
+    <div class="headline">
+      Cambium Electrophysiology <span class="arrow">&rarr;</span> triage on PoVI Engine <span class="arrow">&rarr;</span> <em>Global Carbon Ledger</em>
+    </div>
+  </div>
+
+  <div class="stage">
+    <svg class="arch-canvas" viewBox="0 0 1760 560">
+      <defs>
+        <!-- Gradients for 3D cuboids matching pastel reference palette -->
+        <!-- 1. Muted Rose / Coral (Living Flora) -->
+        <linearGradient id="rose-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#EED3C8" />
+          <stop offset="100%" stop-color="#E5C5B8" />
+        </linearGradient>
+        <linearGradient id="rose-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#DFC0B2" />
+          <stop offset="100%" stop-color="#CFAFA1" />
+        </linearGradient>
+        <linearGradient id="rose-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#C5A496" />
+          <stop offset="100%" stop-color="#BA9889" />
+        </linearGradient>
+
+        <!-- 2. Light Stone Gray (Bio-Node) -->
+        <linearGradient id="gray-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E6ECE7" />
+          <stop offset="100%" stop-color="#D9E1DA" />
+        </linearGradient>
+        <linearGradient id="gray-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#CDD6CE" />
+          <stop offset="100%" stop-color="#C0C9C1" />
+        </linearGradient>
+        <linearGradient id="gray-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#B2BCB3" />
+          <stop offset="100%" stop-color="#A5AEA6" />
+        </linearGradient>
+
+        <!-- 3. Soft Lavender (AI/ML Carbon Oracle) -->
+        <linearGradient id="lav-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E2DAFA" />
+          <stop offset="100%" stop-color="#D4C9F4" />
+        </linearGradient>
+        <linearGradient id="lav-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#C4B8EB" />
+          <stop offset="100%" stop-color="#B4A6E2" />
+        </linearGradient>
+        <linearGradient id="lav-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#A897D8" />
+          <stop offset="100%" stop-color="#9A87CE" />
+        </linearGradient>
+
+        <!-- 4. Soft Sage Green (PoVI Gateway) -->
+        <linearGradient id="sage-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D2E8D7" />
+          <stop offset="100%" stop-color="#C2DEC8" />
+        </linearGradient>
+        <linearGradient id="sage-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#B4D2BB" />
+          <stop offset="100%" stop-color="#A5C5AC" />
+        </linearGradient>
+        <linearGradient id="sage-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#95B69C" />
+          <stop offset="100%" stop-color="#87A88E" />
+        </linearGradient>
+
+        <!-- 5. Muted Amber / Warm (State Ledger) -->
+        <linearGradient id="amber-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F2E4C2" />
+          <stop offset="100%" stop-color="#E8D7B0" />
+        </linearGradient>
+        <linearGradient id="amber-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#D9C79E" />
+          <stop offset="100%" stop-color="#CBB88E" />
+        </linearGradient>
+        <linearGradient id="amber-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#BFA97E" />
+          <stop offset="100%" stop-color="#B09A6E" />
+        </linearGradient>
+
+        <!-- 6. Slate Violet / Indigo (Enterprise DPP) -->
+        <linearGradient id="vio-top" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#DCD4F5" />
+          <stop offset="100%" stop-color="#CEC5EC" />
+        </linearGradient>
+        <linearGradient id="vio-left" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#BFB5DF" />
+          <stop offset="100%" stop-color="#AEA3D2" />
+        </linearGradient>
+        <linearGradient id="vio-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#9E92C3" />
+          <stop offset="100%" stop-color="#8F82B5" />
+        </linearGradient>
+
+        <!-- Shadow filter for moving spheres -->
+        <filter id="glow-coral" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#E76F51" flood-opacity="0.5" />
+        </filter>
+        <filter id="glow-green" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#15803D" flood-opacity="0.5" />
+        </filter>
+        <filter id="glow-purple" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#7C3AED" flood-opacity="0.5" />
+        </filter>
+        <filter id="glow-amber" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#D97706" flood-opacity="0.5" />
+        </filter>
+      </defs>
+
+      <!-- =================================================================== -->
+      <!-- AI/ML ORACLE FEEDER PATH DOWN (CLEAN GAP, ABSOLUTELY NOT TOUCHING BLOCK!) -->
+      <!-- =================================================================== -->
+      <!-- Dotted path from y=165 down to y=255. Note: Edge Bio-Node starts at y=285! 
+           This leaves a clean 30px air gap with zero touching! -->
+      <line x1="440" y1="165" x2="440" y2="250" stroke="#8B5CF6" stroke-width="2" stroke-dasharray="4 4" opacity="0.85" />
+      <circle cx="440" cy="254" r="3.5" fill="#8B5CF6" />
+
+      <!-- Animated Moving Pulses traveling DOWN from AI/ML toward Edge Bio-Node -->
+      <circle cx="440" cy="165" r="5" fill="#8B5CF6" filter="url(#glow-purple)">
+        <animate attributeName="cy" from="165" to="252" dur="1.8s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="440" cy="165" r="4.5" fill="#A78BFA" filter="url(#glow-purple)">
+        <animate attributeName="cy" from="165" to="252" dur="1.8s" begin="0.9s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.9s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- =================================================================== -->
+      <!-- MAIN HORIZONTAL TRANSIT AXIS LINE (y = 350) -->
+      <!-- =================================================================== -->
+      <line x1="40" y1="350" x2="1720" y2="350" stroke="#CCD7CE" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Static Connection Dots matching reference image -->
+      <circle cx="280" cy="350" r="6.5" fill="#E76F51" />
+      <circle cx="600" cy="350" r="6.5" fill="#E76F51" />
+      <circle cx="1240" cy="350" r="7" fill="#14532D" />
+
+      <!-- =================================================================== -->
+      <!-- DYNAMIC MOVING BALLS ALONG THE TRANSIT LINE (Continuous Flow Particles) -->
+      <!-- =================================================================== -->
+      <!-- Moving Ball 1 (Coral Red) -->
+      <circle cy="350" r="8" fill="#E76F51" filter="url(#glow-coral)">
+        <animate attributeName="cx" from="40" to="1720" dur="4.2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;1;0" dur="4.2s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- Moving Ball 2 (Forest Green) -->
+      <circle cy="350" r="8.5" fill="#15803D" filter="url(#glow-green)">
+        <animate attributeName="cx" from="40" to="1720" dur="4.2s" begin="1.05s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;1;0" dur="4.2s" begin="1.05s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- Moving Ball 3 (Purple/Violet) -->
+      <circle cy="350" r="8" fill="#7C3AED" filter="url(#glow-purple)">
+        <animate attributeName="cx" from="40" to="1720" dur="4.2s" begin="2.1s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;1;0" dur="4.2s" begin="2.1s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- Moving Ball 4 (Amber Gold) -->
+      <circle cy="350" r="7.5" fill="#D97706" filter="url(#glow-amber)">
+        <animate attributeName="cx" from="40" to="1720" dur="4.2s" begin="3.15s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;1;1;0" dur="4.2s" begin="3.15s" repeatCount="indefinite" />
+      </circle>
+
+      <!-- =================================================================== -->
+      <!-- AI/ML ORACLE (HOVERING HIGH ABOVE EDGE BIO-NODE WITH PLENTY OF BREATHING ROOM) -->
+      <!-- =================================================================== -->
+      <g transform="translate(375, 40)">
+        <!-- Clean label badge above cube -->
+        <text x="65" y="0" class="oracle-badge-text">AI/ML Oracle</text>
+        <text x="65" y="18" class="oracle-sub-text">Carbon Flux &bull; Open-Meteo</text>
+
+        <!-- Shadow under AI/ML Oracle (y=112) -->
+        <ellipse cx="65" cy="112" rx="52" ry="16" fill="#000000" opacity="0.06" />
+
+        <!-- 3D Isometric Purple Cuboid -->
+        <polygon points="18,40 65,68 65,115 18,88" fill="url(#lav-left)" stroke="#8A7BB3" stroke-width="1.2" />
+        <polygon points="65,68 112,40 112,88 65,115" fill="url(#lav-right)" stroke="#8A7BB3" stroke-width="1.2" />
+        <polygon points="65,16 112,40 65,68 18,40" fill="url(#lav-top)" stroke="#8A7BB3" stroke-width="1.2" />
+
+        <!-- Top indicator dot matching reference -->
+        <circle cx="65" cy="42" r="5" fill="#14301B" />
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 1: Living Cambium (x=60, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(60, 275)">
+        <ellipse cx="80" cy="120" rx="68" ry="24" fill="#000000" opacity="0.05" />
+        <polygon points="15,42 80,80 80,148 15,110" fill="url(#rose-left)" stroke="#B38D7E" stroke-width="1.2" />
+        <polygon points="80,80 145,42 145,110 80,148" fill="url(#rose-right)" stroke="#B38D7E" stroke-width="1.2" />
+        <polygon points="80,10 145,42 80,80 15,42" fill="url(#rose-top)" stroke="#B38D7E" stroke-width="1.2" />
+        
+        <text x="80" y="185" class="block-name">Living Cambium</text>
+        <text x="80" y="210" class="block-sub">Aloe Vera &bull; Probes</text>
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 2: Edge Bio-Node (x=360, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(360, 275)">
+        <ellipse cx="80" cy="120" rx="68" ry="24" fill="#000000" opacity="0.05" />
+        <polygon points="15,42 80,80 80,148 15,110" fill="url(#gray-left)" stroke="#9DA89E" stroke-width="1.2" />
+        <polygon points="80,80 145,42 145,110 80,148" fill="url(#gray-right)" stroke="#9DA89E" stroke-width="1.2" />
+        <polygon points="80,10 145,42 80,80 15,42" fill="url(#gray-top)" stroke="#9DA89E" stroke-width="1.2" />
+        
+        <text x="80" y="185" class="block-name">Edge Bio-Node</text>
+        <text x="80" y="210" class="block-sub">TinyML DSP &bull; 64x</text>
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 3: PoVI Consensus Gateway (x=680, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(680, 275)">
+        <ellipse cx="80" cy="120" rx="68" ry="24" fill="#000000" opacity="0.05" />
+        <polygon points="15,42 80,80 80,148 15,110" fill="url(#sage-left)" stroke="#7FA588" stroke-width="1.2" />
+        <polygon points="80,80 145,42 145,110 80,148" fill="url(#sage-right)" stroke="#7FA588" stroke-width="1.2" />
+        <polygon points="80,10 145,42 80,80 15,42" fill="url(#sage-top)" stroke="#7FA588" stroke-width="1.2" />
+        <!-- Top indicator dot matching reference -->
+        <circle cx="80" cy="45" r="5" fill="#14301B" />
+
+        <text x="80" y="185" class="block-name">PoVI Gateway</text>
+        <text x="80" y="210" class="block-sub">13.47k&Omega; &bull; Phase Lag</text>
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 4: State Ledger (x=1000, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(1000, 275)">
+        <ellipse cx="80" cy="120" rx="68" ry="24" fill="#000000" opacity="0.05" />
+        <polygon points="15,42 80,80 80,148 15,110" fill="url(#amber-left)" stroke="#9F8B61" stroke-width="1.2" />
+        <polygon points="80,80 145,42 145,110 80,148" fill="url(#amber-right)" stroke="#9F8B61" stroke-width="1.2" />
+        <polygon points="80,10 145,42 80,80 15,42" fill="url(#amber-top)" stroke="#9F8B61" stroke-width="1.2" />
+        <!-- Top indicator dot matching reference -->
+        <circle cx="80" cy="45" r="5" fill="#14301B" />
+
+        <text x="80" y="185" class="block-name">State Ledger</text>
+        <text x="80" y="210" class="block-sub">SHA-256 &bull; Slashing</text>
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 5: Enterprise DPP & Market (x=1320, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(1320, 275)">
+        <ellipse cx="80" cy="120" rx="68" ry="24" fill="#000000" opacity="0.05" />
+        <polygon points="15,42 80,80 80,148 15,110" fill="url(#vio-left)" stroke="#8577AA" stroke-width="1.2" />
+        <polygon points="80,80 145,42 145,110 80,148" fill="url(#vio-right)" stroke="#8577AA" stroke-width="1.2" />
+        <polygon points="80,10 145,42 80,80 15,42" fill="url(#vio-top)" stroke="#8577AA" stroke-width="1.2" />
+
+        <text x="80" y="185" class="block-name">Enterprise DPP</text>
+        <text x="80" y="210" class="block-sub">Passports &bull; Trading</text>
+      </g>
+
+      <!-- =================================================================== -->
+      <!-- BLOCK 6 (Terminal): Verifier (x=1580, baseline y=350) -->
+      <!-- =================================================================== -->
+      <g transform="translate(1580, 290)">
+        <ellipse cx="48" cy="95" rx="44" ry="17" fill="#000000" opacity="0.05" />
+        <polygon points="12,28 48,50 48,98 12,76" fill="url(#rose-left)" stroke="#B38D7E" stroke-width="1.2" />
+        <polygon points="48,50 84,28 84,76 48,98" fill="url(#rose-right)" stroke="#B38D7E" stroke-width="1.2" />
+        <polygon points="48,10 84,28 48,50 12,28" fill="url(#rose-top)" stroke="#B38D7E" stroke-width="1.2" />
+
+        <text x="48" y="132" class="block-name" style="font-size:17px;">Verifier</text>
+        <text x="48" y="154" class="block-sub">Browser &bull; API</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer-bar">
+    <div>PhytoNet Ledger Architectural Pipeline &bull; IEEE ClimateChain Global Hackathon</div>
+    <div class="spec">Deterministic Biophysical Integrity &bull; Zero Cloud Overhead</div>
+  </div>
+</body>
+</html>

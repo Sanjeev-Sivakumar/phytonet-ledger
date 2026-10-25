@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhytoNet Ledger — Innovation &amp; Creativity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1920px;
+      height: 1080px;
+      /* Distinct Slide 5: Soft Architectural Sand & Cream Alabaster */
+      background: linear-gradient(150deg, #FBFBF8 0%, #F5F4EC 100%);
+      color: #1A1A1A;
+      font-family: 'Roboto', -apple-system, sans-serif;
+      padding: 55px 90px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(#E8E5DA 1px, transparent 1px),
+        linear-gradient(90deg, #E8E5DA 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .top-header {
+      position: relative;
+      z-index: 2;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #78716C;
+      margin-bottom: 6px;
+    }
+
+    .headline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #1C1917;
+      letter-spacing: -0.015em;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: #15803D;
+    }
+
+    /* 2-Column Side-by-Side Comparison Grid - Roomy & Uncongested */
+    .grid-comparison {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin: 12px 0;
+    }
+
+    .col-card {
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 4px 14px rgba(28, 25, 23, 0.03);
+    }
+
+    .col-card.legacy {
+      border: 1px solid #E7E5E4;
+      background: #FAF9F8;
+    }
+
+    .col-card.innovative {
+      border: 1px solid #CDE5D5;
+      background: #F4FAF6;
+    }
+
+    .col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E7E5E4;
+      padding-bottom: 12px;
+    }
+
+    .col-card.innovative .col-header {
+      border-bottom: 1px solid #CDE5D5;
+    }
+
+    .col-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #292524;
+    }
+
+    .col-card.innovative .col-title {
+      color: #14532D;
+    }
+
+    .col-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .legacy .col-badge {
+      background: #F5F5F4;
+      color: #78716C;
+      border: 1px solid #D6D3D1;
+    }
+
+    .innovative .col-badge {
+      background: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #86EFAC;
+    }
+
+    /* Comparison Row Items */
+    .points-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .point-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid #F0EEE9;
+    }
+
+    .innovative .point-item {
+      border: 1px solid #D6ECE0;
+    }
+
+    .point-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #78716C;
+      background: #F5F5F4;
+      padding: 3px 8px;
+      border-radius: 6px;
+      min-width: 32px;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .innovative .point-num {
+      color: #15803D;
+      background: #E8F7ED;
+    }
+
+    .point-body {
+      flex: 1;
+    }
+
+    .point-headline {
+      font-family: 'Roboto', sans-serif;
+      font-size: 15.5px;
+      font-weight: 400; /* Clean lightweight title */
+      color: #1C1917;
+      margin-bottom: 2px;
+    }
+
+    .innovative .point-headline {
+      color: #0F5132;
+    }
+
+    .point-desc {
+      font-family: 'Roboto', sans-serif;
+      font-size: 13.5px;
+      font-weight: 300; /* Lightweight font as requested */
+      color: #57534E;
+      line-height: 1.5;
+    }
+
+    .footer-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #E7E5E4;
+      padding-top: 14px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #78716C;
+    }
+
+    .footer-bar .spec {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #15803D;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="top-header">
+    <div class="tag">PARADIGM SHIFT</div>
+    <div class="headline">
+      Innovation &amp; Creativity: <em>Status Quo vs PhytoNet Ledger</em>
+    </div>
+  </div>
+
+  <div class="grid-comparison">
+    <!-- Legacy Column (5 Points) -->
+    <div class="col-card legacy">
+      <div class="col-header">
+        <div class="col-title">Status Quo (Conventional MRV)</div>
+        <div class="col-badge">Legacy Fragility</div>
+      </div>
+      <div class="points-list">
+        <div class="point-item">
+          <div class="point-num">01</div>
+          <div class="point-body">
+            <div class="point-headline">Delayed Verification Cycles</div>
+            <div class="point-desc">Relies on periodic 18-36 month third-party auditor visits and optical satellite passes.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">02</div>
+          <div class="point-body">
+            <div class="point-headline">Easily Cloned Static Radio Payloads</div>
+            <div class="point-desc">Standard ambient loggers transmit static numeric floats that bad actors easily replay.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">03</div>
+          <div class="point-body">
+            <div class="point-headline">Inter-Registry Double Counting</div>
+            <div class="point-desc">Siloed databases allow duplicate credit retirement across multiple voluntary registries.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">04</div>
+          <div class="point-body">
+            <div class="point-headline">Silent Sensor Pull-Out Failure</div>
+            <div class="point-desc">When probes are detached or placed into simulated media, centralized databases fail to detect.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">05</div>
+          <div class="point-body">
+            <div class="point-headline">Exorbitant Certification Costs</div>
+            <div class="point-desc">Third-party verifier retainers consume up to 40% of smallholder carbon credit capital.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Innovative Column (5 Points) -->
+    <div class="col-card innovative">
+      <div class="col-header">
+        <div class="col-title">PhytoNet Ledger Innovation</div>
+        <div class="col-badge">Living Authority</div>
+      </div>
+      <div class="points-list">
+        <div class="point-item">
+          <div class="point-num">01</div>
+          <div class="point-body">
+            <div class="point-headline">Sub-Second Vascular Cambium Telemetry</div>
+            <div class="point-desc">Direct living tissue probe streaming 13.47 k&Omega; cellular impedance and sap flow in real time.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">02</div>
+          <div class="point-body">
+            <div class="point-headline">Unclonable Biological Entropy Nonces</div>
+            <div class="point-desc">Unpredictable plant cellular ion fluctuations generate cryptographic nonces that cannot be forged.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">03</div>
+          <div class="point-body">
+            <div class="point-headline">Autonomous Smart Contract Anti-Double-Counting</div>
+            <div class="point-desc">On-chain Proof-of-Vascular-Integrity locks prevent duplicate tokenization across supply chains.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">04</div>
+          <div class="point-body">
+            <div class="point-headline">Immediate Slashing on Wire Severance</div>
+            <div class="point-desc">Electrophysiological drop immediately freezes minting, slashes stakes, and sends SMTP alerts.</div>
+          </div>
+        </div>
+        <div class="point-item">
+          <div class="point-num">05</div>
+          <div class="point-body">
+            <div class="point-headline">99.4% MRV Cost Reduction</div>
+            <div class="point-desc">Sentinel cluster architecture anchors thousands of hectares for less than $45 per bio-node.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div>PhytoNet Ledger Competitive Differentiation &bull; IEEE ClimateChain Global Hackathon</div>
+    <div class="spec">Deterministic Botanical Authority &bull; Zero Emojis</div>
+  </div>
+</body>
+</html>

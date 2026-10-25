@@ -1,0 +1,45 @@
+{
+  "datasets": [
+    {
+      "id": "douglas_fir_cambium_01",
+      "name": "Pacific Northwest Douglas Fir (Pseudotsuga menziesii) - 120yr Old Growth",
+      "species": "Pseudotsuga menziesii",
+      "ambient": { "temperature_c": 19.8, "humidity_pct": 74.2, "ppfd_umol": 920.0, "soil_moisture_pct": 42.1 },
+      "data": [
+        { "timestamp_offset_s": 0, "sap_current_mv": 18.4, "impedance_kohm": 24.8, "phase_shift_deg": 9.2, "ps_rate": 8.1, "ambient_ppfd": 880 },
+        { "timestamp_offset_s": 5, "sap_current_mv": 21.2, "impedance_kohm": 24.3, "phase_shift_deg": 9.6, "ps_rate": 8.7, "ambient_ppfd": 910 },
+        { "timestamp_offset_s": 10, "sap_current_mv": 24.6, "impedance_kohm": 23.9, "phase_shift_deg": 10.1, "ps_rate": 9.4, "ambient_ppfd": 940 },
+        { "timestamp_offset_s": 15, "sap_current_mv": 26.8, "impedance_kohm": 23.5, "phase_shift_deg": 10.4, "ps_rate": 9.8, "ambient_ppfd": 960 },
+        { "timestamp_offset_s": 20, "sap_current_mv": 25.1, "impedance_kohm": 23.7, "phase_shift_deg": 10.2, "ps_rate": 9.5, "ambient_ppfd": 950 },
+        { "timestamp_offset_s": 25, "sap_current_mv": 22.9, "impedance_kohm": 24.1, "phase_shift_deg": 9.8, "ps_rate": 9.0, "ambient_ppfd": 930 },
+        { "timestamp_offset_s": 30, "sap_current_mv": 19.7, "impedance_kohm": 24.6, "phase_shift_deg": 9.4, "ps_rate": 8.4, "ambient_ppfd": 890 }
+      ]
+    },
+    {
+      "id": "ficus_microcarpa_tropics",
+      "name": "Indian Banyan (Ficus microcarpa) - Aerial Stilt Root Vascular Flux",
+      "species": "Ficus microcarpa",
+      "ambient": { "temperature_c": 28.5, "humidity_pct": 82.0, "ppfd_umol": 1150.0, "soil_moisture_pct": 58.4 },
+      "data": [
+        { "timestamp_offset_s": 0, "sap_current_mv": 34.2, "impedance_kohm": 18.2, "phase_shift_deg": 12.4, "ps_rate": 11.2, "ambient_ppfd": 1100 },
+        { "timestamp_offset_s": 5, "sap_current_mv": 38.6, "impedance_kohm": 17.8, "phase_shift_deg": 13.1, "ps_rate": 12.0, "ambient_ppfd": 1140 },
+        { "timestamp_offset_s": 10, "sap_current_mv": 42.1, "impedance_kohm": 17.2, "phase_shift_deg": 13.8, "ps_rate": 12.8, "ambient_ppfd": 1180 },
+        { "timestamp_offset_s": 15, "sap_current_mv": 40.5, "impedance_kohm": 17.5, "phase_shift_deg": 13.4, "ps_rate": 12.4, "ambient_ppfd": 1160 },
+        { "timestamp_offset_s": 20, "sap_current_mv": 36.9, "impedance_kohm": 18.0, "phase_shift_deg": 12.7, "ps_rate": 11.7, "ambient_ppfd": 1120 }
+      ]
+    },
+    {
+      "id": "quercus_robur_drought",
+      "name": "English Oak (Quercus robur) - Severe Drought & Cavitation Acoustic Spike",
+      "species": "Quercus robur",
+      "ambient": { "temperature_c": 33.1, "humidity_pct": 31.0, "ppfd_umol": 1300.0, "soil_moisture_pct": 14.2 },
+      "data": [
+        { "timestamp_offset_s": 0, "sap_current_mv": 6.2, "impedance_kohm": 42.5, "phase_shift_deg": 4.8, "ps_rate": 3.2, "ambient_ppfd": 1280 },
+        { "timestamp_offset_s": 5, "sap_current_mv": 4.8, "impedance_kohm": 44.1, "phase_shift_deg": 4.3, "ps_rate": 2.8, "ambient_ppfd": 1290 },
+        { "timestamp_offset_s": 10, "sap_current_mv": 2.1, "impedance_kohm": 47.9, "phase_shift_deg": 3.8, "ps_rate": 1.9, "ambient_ppfd": 1300 },
+        { "timestamp_offset_s": 15, "sap_current_mv": 1.4, "impedance_kohm": 51.2, "phase_shift_deg": 3.5, "ps_rate": 1.5, "ambient_ppfd": 1310 },
+        { "timestamp_offset_s": 20, "sap_current_mv": 0.8, "impedance_kohm": 53.6, "phase_shift_deg": 3.1, "ps_rate": 1.1, "ambient_ppfd": 1300 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhytoNet Ledger — Feasibility &amp; Forest Scalability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1920px;
+      height: 1080px;
+      /* Distinct Slide 6: Fresh Light Meadow Green-Alabaster */
+      background: linear-gradient(150deg, #F4FAF5 0%, #EBF6EF 100%);
+      color: #112415;
+      font-family: 'Roboto', -apple-system, sans-serif;
+      padding: 55px 90px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(#DBEBDF 1px, transparent 1px),
+        linear-gradient(90deg, #DBEBDF 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .top-header {
+      position: relative;
+      z-index: 2;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #166534;
+      margin-bottom: 6px;
+    }
+
+    .headline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #142417;
+      letter-spacing: -0.015em;
+    }
+
+    .headline em {
+      font-style: italic;
+      color: #15803D;
+    }
+
+    /* 4-Column Grid - Spacious & Uncongested, No Cheesy Icons */
+    .grid-scalability {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin: 14px 0;
+    }
+
+    .scale-card {
+      background: #FFFFFF;
+      border: 1px solid #CFE6D6;
+      border-radius: 16px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 3px 12px rgba(20, 83, 45, 0.04);
+      height: 600px;
+    }
+
+    .scale-card.how-to-scale {
+      border: 1.5px solid #86EFAC;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5FBF7 100%);
+    }
+
+    .card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #E5F0E8;
+      padding-bottom: 10px;
+    }
+
+    .card-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: #15803D;
+      background: #DCFCE7;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: #166534;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-title {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 23px;
+      font-weight: 500;
+      color: #0F2313;
+      line-height: 1.2;
+    }
+
+    .scale-card.how-to-scale .card-title {
+      color: #14532D;
+    }
+
+    .card-desc {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 300; /* Lightweight font as requested */
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    /* Specs & Metrics inside Card */
+    .metric-box {
+      background: #F8FCF9;
+      border: 1px solid #E1EFE5;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-val {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #15803D;
+    }
+
+    .metric-lbl {
+      font-family: 'Roboto', sans-serif;
+      font-size: 12.5px;
+      font-weight: 300;
+      color: #64748B;
+    }
+
+    /* Protocol Steps for Column 4 */
+    .protocol-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .protocol-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: #FFFFFF;
+      border: 1px solid #E5EFE8;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .step-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #15803D;
+      background: #DCFCE7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .step-text {
+      flex: 1;
+      font-family: 'Roboto', sans-serif;
+      font-size: 12.5px;
+      font-weight: 300;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .step-title {
+      font-weight: 400;
+      color: #0F172A;
+    }
+
+    .footer-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #CFE6D6;
+      padding-top: 14px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #5C6E61;
+    }
+
+    .footer-bar .spec {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #15803D;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div class="top-header">
+    <div class="tag">REAL-WORLD FEASIBILITY &amp; CANOPY SCALABILITY</div>
+    <div class="headline">
+      Forest-Scale Deployment: <em>The Sentinel Cluster Architecture</em>
+    </div>
+  </div>
+
+  <div class="grid-scalability">
+    <!-- Column 1: Sentinel Trees -->
+    <div class="scale-card">
+      <div class="card-top">
+        <div class="card-meta">
+          <div class="card-index">01</div>
+          <div class="card-tag">Ground Anchors</div>
+        </div>
+        <div class="card-title">Sentinel Tree Topology</div>
+        <div class="card-desc">
+          Rather than instrumenting every tree, 1 to 3 mature sentinel trees per 10-hectare sector serve as cryptographic anchors. Micro-needles monitor deep cambium water potential and electrical flux to benchmark entire canopy health.
+        </div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">1 : 1,000+</div>
+        <div class="metric-lbl">Bio-Node to uninstrumented tree ratio benchmarked by cambium impedance</div>
+      </div>
+    </div>
+
+    <!-- Column 2: Solar Mesh -->
+    <div class="scale-card">
+      <div class="card-top">
+        <div class="card-meta">
+          <div class="card-index">02</div>
+          <div class="card-tag">Canopy Mesh</div>
+        </div>
+        <div class="card-title">Solar Canopy Mesh</div>
+        <div class="card-desc">
+          Bio-Nodes communicate over sub-GHz LoRa mesh networks powered by micro-photovoltaic cells and super-capacitors. The ultra-low-power sleep architecture operates maintenance-free for decades under thick canopy shade.
+        </div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">&lt; 15 &mu;A</div>
+        <div class="metric-lbl">Deep-sleep current consumption with autonomous wake-on-transpiration</div>
+      </div>
+    </div>
+
+    <!-- Column 3: Satellite Validation -->
+    <div class="scale-card">
+      <div class="card-top">
+        <div class="card-meta">
+          <div class="card-index">03</div>
+          <div class="card-tag">Tier-3 Synergy</div>
+        </div>
+        <div class="card-title">Satellite Cross-Validation</div>
+        <div class="card-desc">
+          Sentinel bio-telemetry provides uninterrupted ground truth that cross-calibrates quarterly Synthetic Aperture Radar (SAR) and multi-spectral NDVI overpasses, completely eliminating manual forestry field audits.
+        </div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val">99.4%</div>
+        <div class="metric-lbl">MRV cost reduction compared to legacy third-party certification retainers</div>
+      </div>
+    </div>
+
+    <!-- Column 4: How To Scale Protocol -->
+    <div class="scale-card how-to-scale">
+      <div class="card-top">
+        <div class="card-meta">
+          <div class="card-index">04</div>
+          <div class="card-tag">Execution Roadmap</div>
+        </div>
+        <div class="card-title">How To Scale Protocol</div>
+        <div class="card-desc">
+          A standardized 4-step deployment framework engineered for forestry operators and sovereign land registries:
+        </div>
+        <div class="protocol-steps">
+          <div class="protocol-step">
+            <div class="step-badge">P1</div>
+            <div class="step-text"><span class="step-title">Canopy Stratification:</span> Satellite NDVI defines tree density clusters.</div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-badge">P2</div>
+            <div class="step-text"><span class="step-title">Sentinel Insertion:</span> Probing 3 sentinel trees per 10 hectares.</div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-badge">P3</div>
+            <div class="step-text"><span class="step-title">Gateway Mesh Sync:</span> Local LoRa nodes sync to PoVI smart contracts.</div>
+          </div>
+          <div class="protocol-step">
+            <div class="step-badge">P4</div>
+            <div class="step-text"><span class="step-title">Enterprise Issuance:</span> Automated credit minting anchored to live nonces.</div>
+          </div>
+        </div>
+      </div>
+      <div class="metric-box" style="background:#EDF9F0; border-color:#C3E6CC;">
+        <div class="metric-val" style="color:#15803D;">&lt; $45 / Node</div>
+        <div class="metric-lbl">Total hardware Bill-of-Materials for edge bio-node assembly</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div>PhytoNet Ledger Scalability Architecture &bull; IEEE ClimateChain Global Hackathon</div>
+    <div class="spec">Multi-Tier Botanical MRV &bull; Zero Battery Replacements</div>
+  </div>
+</body>
+</html>

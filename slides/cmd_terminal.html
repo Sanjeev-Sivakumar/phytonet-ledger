@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Prompt — Blockchain Hash Evidence</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1920px;
+      height: 1080px;
+      background: radial-gradient(circle at 50% 30%, #1E293B 0%, #0F172A 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Consolas', 'Courier New', monospace;
+      color: #CCCCCC;
+      overflow: hidden;
+      padding: 40px;
+    }
+    .window {
+      width: 1600px;
+      height: 900px;
+      background: #0C0C0C;
+      border-radius: 12px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* Windows Title Bar */
+    .titlebar {
+      height: 44px;
+      background: #1F1F1F;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      border-bottom: 1px solid #2B2B2B;
+      user-select: none;
+    }
+    .titlebar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #E2E8F0;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+    .cmd-icon {
+      width: 18px;
+      height: 18px;
+      background: #000;
+      border: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #fff;
+      border-radius: 2px;
+    }
+    .titlebar-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-win {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .btn-min { background: #64748B; }
+    .btn-max { background: #64748B; }
+    .btn-close { background: #EF4444; }
+
+    /* Console Content */
+    .console-body {
+      flex: 1;
+      padding: 28px 36px;
+      font-size: 20px;
+      line-height: 1.7;
+      overflow: hidden;
+      position: relative;
+    }
+    .line {
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .dim {
+      color: #71717A;
+    }
+    .prompt {
+      color: #E4E4E7;
+      font-weight: 600;
+    }
+    .typed-cmd {
+      color: #38BDF8;
+      font-weight: 600;
+    }
+    .hash-output {
+      color: #4ADE80;
+      font-weight: bold;
+      font-size: 22px;
+      background: rgba(74, 222, 128, 0.08);
+      padding: 6px 14px;
+      border-left: 4px solid #4ADE80;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 6px 0 16px 0;
+      letter-spacing: 1px;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: #FFFFFF;
+      vertical-align: middle;
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* Verification Ribbon */
+    .status-ribbon {
+      margin-top: auto;
+      background: #18181B;
+      border-top: 1px solid #27272A;
+      padding: 12px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #A1A1AA;
+    }
+    .status-badge {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid #22C55E;
+      color: #4ADE80;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <div class="titlebar-left">
+        <div class="cmd-icon">C:\</div>
+        <span>Command Prompt — python cli/retrieve_hash.py</span>
+      </div>
+      <div class="titlebar-controls">
+        <span class="btn-win btn-min"></span>
+        <span class="btn-win btn-max"></span>
+        <span class="btn-win btn-close"></span>
+      </div>
+    </div>
+
+    <div class="console-body">
+      <div class="line dim">Microsoft Windows [Version 10.0.22631.4317]</div>
+      <div class="line dim">(c) Microsoft Corporation. All rights reserved.</div>
+      <div class="line">&nbsp;</div>
+
+      <!-- Execution 1: Query Block 104892 -->
+      <div class="line">
+        <span class="prompt">C:\Projects\IEEE Climate&gt;</span>
+        <span class="typed-cmd" id="cmd1"></span>
+      </div>
+      <div class="line" id="out1" style="display: none;">
+        <span class="hash-output">0x7a3f59e4c192bf88e9d3002f1ba8e34891bca7f9103d854e790a16b3d142b891</span>
+      </div>
+
+      <!-- Execution 2: Merkle Root -->
+      <div class="line" id="prompt2" style="display: none;">
+        <span class="prompt">C:\Projects\IEEE Climate&gt;</span>
+        <span class="typed-cmd" id="cmd2"></span>
+      </div>
+      <div class="line" id="out2" style="display: none;">
+        <span class="hash-output" style="color: #60A5FA; border-left-color: #60A5FA; background: rgba(96, 165, 250, 0.08);">0x93dc41f08e5c2b64720948acba081e7d23a9b1c85d774e14d3b668021948ba20</span>
+      </div>
+
+      <!-- Execution 3: Biological Cambium Nonce Hash -->
+      <div class="line" id="prompt3" style="display: none;">
+        <span class="prompt">C:\Projects\IEEE Climate&gt;</span>
+        <span class="typed-cmd" id="cmd3"></span>
+      </div>
+      <div class="line" id="out3" style="display: none;">
+        <span class="hash-output" style="color: #FBBF24; border-left-color: #FBBF24; background: rgba(251, 191, 36, 0.08);">0x8f4b1192e47c1a9388df230b8c715ea01994e63f58a74139bd01a2d593e8412c</span>
+      </div>
+
+      <!-- Active Cursor Line -->
+      <div class="line" id="active-line" style="display: none;">
+        <span class="prompt">C:\Projects\IEEE Climate&gt;</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+
+    <div class="status-ribbon">
+      <div>Proof-of-Vascular-Integrity &bull; SHA-256 Biological State Hash Verification</div>
+      <div class="status-badge">&bull; ONLY DETERMINISTIC HASH RETURNED &bull; 100% UNFORGEABLE</div>
+    </div>
+  </div>
+
+  <script>
+    // Typing simulation
+    const typeText = async (elementId, text, speed = 40) => {
+      const el = document.getElementById(elementId);
+      for (let i = 0; i < text.length; i++) {
+        el.textContent += text[i];
+        await new Promise(r => setTimeout(r, speed));
+      }
+    };
+
+    async function runTerminalSequence() {
+      await new Promise(r => setTimeout(r, 600));
+
+      // 1. Type query block
+      await typeText('cmd1', 'python cli/retrieve_hash.py --block 104892', 35);
+      await new Promise(r => setTimeout(r, 400));
+      document.getElementById('out1').style.display = 'block';
+
+      // 2. Merkle Root Query
+      await new Promise(r => setTimeout(r, 800));
+      document.getElementById('prompt2').style.display = 'block';
+      await typeText('cmd2', 'python cli/retrieve_hash.py --verify-merkle-root', 30);
+      await new Promise(r => setTimeout(r, 350));
+      document.getElementById('out2').style.display = 'block';
+
+      // 3. Living Nonce Query
+      await new Promise(r => setTimeout(r, 800));
+      document.getElementById('prompt3').style.display = 'block';
+      await typeText('cmd3', 'python cli/retrieve_hash.py --bio-cambium-entropy', 30);
+      await new Promise(r => setTimeout(r, 350));
+      document.getElementById('out3').style.display = 'block';
+
+      // Final cursor
+      await new Promise(r => setTimeout(r, 500));
+      document.getElementById('active-line').style.display = 'block';
+    }
+
+    window.addEventListener('DOMContentLoaded', runTerminalSequence);
+  </script>
+</body>
+</html>

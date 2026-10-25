@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Core Blended Light-Forest Design System Tokens */
+:root {
+  /* Soft, soothing, eye-comfortable light-green canvas */
+  --bg-main: #EDF3EE;
+  
+  /* Crisp clean surfaces that blend with light-green background */
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F6FAF7;
+  --surface-tertiary: #E8F1EA;
+  
+  /* Forest & Plant Greens */
+  --forest-green: #1E562A;
+  --forest-green-dark: #13391B;
+  --moss-green: #2E7D32;
+  --leaf-green: #15803D;
+  --emerald-accent: #059669;
+  --sage-border: #D2E2D5;
+  --sage-border-subtle: #E2ECE4;
+
+  /* High-Contrast, Eye-Friendly Forest Charcoal & Slate Text */
+  --text-main: #112415;
+  --text-secondary: #3B5740;
+  --text-muted: #627E67;
+  --text-inverse: #FFFFFF;
+
+  /* Card and Panel Tokens */
+  --panel-daylight: #FFFFFF;
+  --panel-border: #D2E2D5;
+  --chart-text: #112415;
+
+  /* Status Colors (Accessible, non-glare) */
+  --status-success-bg: #E8F7ED;
+  --status-success-text: #15803D;
+  --status-success-border: #86EFAC;
+
+  --status-warn-bg: #FEF3C7;
+  --status-warn-text: #B45309;
+  --status-warn-border: #FCD34D;
+
+  --status-danger-bg: #FEE2E2;
+  --status-danger-text: #B91C1C;
+  --status-danger-border: #FCA5A5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 1rem; /* 16px prominent base */
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings & Base Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Blended Forest Surface Containers (Solid crisp white on light-green background) */
+.forest-panel {
+  background-color: #FFFFFF;
+  border: 1px solid var(--sage-border);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgba(20, 45, 25, 0.04), 0 1px 2px -1px rgba(20, 45, 25, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.forest-panel:hover {
+  border-color: #BACFC0;
+  box-shadow: 0 4px 12px -2px rgba(20, 45, 25, 0.07), 0 2px 4px -2px rgba(20, 45, 25, 0.04);
+}
+
+.forest-card-secondary {
+  background-color: var(--surface-secondary);
+  border: 1px solid var(--sage-border);
+  border-radius: 12px;
+}
+
+/* High-Readability Data Panels (Charts, Tables, Passports) */
+.daylight-chart-panel {
+  background-color: #FFFFFF !important;
+  border: 1px solid var(--sage-border) !important;
+  border-radius: 16px;
+  color: var(--text-main) !important;
+  box-shadow: 0 1px 3px 0 rgba(20, 45, 25, 0.04), 0 1px 2px -1px rgba(20, 45, 25, 0.03);
+  transition: all 0.2s ease;
+}
+
+.daylight-chart-panel:hover {
+  border-color: #BACFC0 !important;
+  box-shadow: 0 4px 12px -2px rgba(20, 45, 25, 0.07);
+}
+
+.daylight-chart-panel .chart-title {
+  color: var(--text-main) !important;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.daylight-chart-panel .chart-meta {
+  color: var(--text-secondary) !important;
+  font-size: 0.8125rem;
+}
+
+/* Clean Light-Theme Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EDF3EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B6CEBC;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8FAFA6;
+}
+
+/* Status Indicator Pulses */
+.pulse-green {
+  animation: bioPulse 3s infinite ease-in-out;
+}
+
+@keyframes bioPulse {
+  0% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.5); }
+  70% { box-shadow: 0 0 0 6px rgba(21, 128, 61, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0); }
+}
+
+.pulse-crimson {
+  animation: slashPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes slashPulse {
+  0% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(185, 28, 28, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(185, 28, 28, 0); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
